@@ -8,15 +8,24 @@ const app = next({ dev })
 const handle = app.getRequestHandler()
 // const { parse } = require('url')
 
-const server = express()
-// const route = pathMatch()
-server.use('/_next', express.static(path.join(__dirname, '.next')))
-server.get('/', (req, res) => app.render(req, res, '/'))
-// server.get('/dogs', (req, res) => app.render(req, res, '/dogs'))
-// server.get('/dogs/:breed', (req, res) => {
-//   const params = route('/dogs/:breed')(parse(req.url).pathname)
-//   return app.render(req, res, '/dogs/_breed', params)
-// })
-server.get('*', (req, res) => handle(req, res))
+function prepareServer (callback) {
+  app.prepare().then(() => {
+    callback(setupServer())
+  })
+}
 
-module.exports = server
+function setupServer () {
+  const server = express()
+  // const route = pathMatch()
+  server.use('/_next', express.static(path.join(__dirname, '.next')))
+  server.get('/', (req, res) => app.render(req, res, '/'))
+  // server.get('/dogs', (req, res) => app.render(req, res, '/dogs'))
+  // server.get('/dogs/:breed', (req, res) => {
+  //   const params = route('/dogs/:breed')(parse(req.url).pathname)
+  //   return app.render(req, res, '/dogs/_breed', params)
+  // })
+  server.get('*', (req, res) => handle(req, res))
+  return server
+}
+
+module.exports = { prepareServer, setupServer }
