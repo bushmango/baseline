@@ -1,0 +1,32 @@
+body {
+  font-family: Nunito;
+}
+
+.layout {
+  font-family: Nunito;
+}
+
+h1 {
+  font-size: 20px;
+  margin: 20px;
+  margin-bottom: 10px;
+}
+
+h2 {
+  font-size: 16px;
+  margin: 10px;
+  margin-left: 30px;
+}
+
+input[type='text'],
+textarea {
+  margin: 0;
+  padding: 2px;
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid #aaa;
+  border-radius: 3px;
+
+  width: 100%;
+  min-width: 100%;
+  max-width: 100%;
+}

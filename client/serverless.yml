@@ -1,0 +1,53 @@
+service: cowsayify-v3-001
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  memorySize: 512
+  region: us-east-1
+  stage: ${opt:stage}
+  environment:
+    NODE_ENV: ${file(./.env.yml):${opt:stage}.NODE_ENV}
+    NODE_STAGE: ${opt:stage}
+
+plugins:
+  - serverless-nextjs-plugin
+  - serverless-s3-sync
+  - serverless-domain-manager
+
+custom:
+  stage: ${opt:stage}
+  customDomain:
+    domainName: ${opt:stage}.cowsayify.com
+    stage: ${opt:stage}
+    certificateName: 'cowsayify.com'
+    createRoute53Record: true
+    endpointType: 'edge'
+  serverless-nextjs:
+    nextConfigDir: './'
+    pageConfig:
+      cowsaid:
+        events:
+          - http:
+              path: cowsaid/{key}
+              request:
+                parameters:
+                  paths:
+                    key: true
+  s3Sync:
+    - bucketName: serverless-cowsay-v3-${opt:stage}
+      bucketPrefix: static/
+      localDir: static
+      acl: public-read
+      defaultContentType: text/html
+      params:
+        - index.html:
+            CacheControl: 'no-cache'
+        - '*.css':
+            CacheControl: 'public, max-age=604800'
+        - '*.js':
+            CacheControl: 'public, max-age=31536000'
+
+package:
+  exclude:
+    - ./**
