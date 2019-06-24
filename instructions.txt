@@ -1,0 +1,6 @@
+
+
+- Request a certificate in Certificate Manager for *.yourdomain.com
+- awsume into the roll you need (i.e. steve)
+- run sls create_somain
+- wait 40 minutesnpm install serverless-domain-manager --save-dev

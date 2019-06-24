@@ -60,7 +60,7 @@ provider:
 
 functions:
   hello:
-    handler: handler.server
+    handler: server/handler.server
     events:
       - http: ANY /
       - http: ANY /{proxy+}
@@ -114,6 +114,11 @@ functions:
 plugins:
   - serverless-apigw-binary
   - serverless-domain-manager
+  - serverless-plugin-common-excludes
+  - serverless-plugin-include-dependencies
+
+package:
+  excludeDevDependencies: false
 
 custom:
   secrets: ${file(server/secrets.json)}
