@@ -4,7 +4,7 @@ import * as express from 'express'
 import * as next from 'next'
 import * as _ from 'lodash'
 
-const port = parseInt(process.env.PORT, 10) || 3006
+const port = parseInt(process.env.PORT, 10) || 3007
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 const handle = app.getRequestHandler()

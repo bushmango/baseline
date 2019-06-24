@@ -1,14 +1,9 @@
 import React from 'react'
 
-import Layout from '@components/shared/Layout'
 import styles from './AboutPage.scss'
 
 function About(props: { data: any }) {
-  return (
-    <Layout title='about'>
-      <AboutPage />
-    </Layout>
-  )
+  return <AboutPage />
 }
 
 const AboutPage = () => {
