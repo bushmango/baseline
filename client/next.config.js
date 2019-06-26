@@ -18,7 +18,7 @@ console.log('stage', stage)
 module.exports = (phase, { defaultConfig }) => {
   let config = withTypescript(
     withSass({
-      webpack (config, options) {
+      webpack(config, options) {
         // Do not run type checking twice:
         if (options.isServer) {
           config.plugins.push(new ForkTsCheckerWebpackPlugin())
@@ -33,7 +33,7 @@ module.exports = (phase, { defaultConfig }) => {
         // }
         config.resolve.plugins = [
           ...(config.resolve.plugins || []),
-          new TsConfigPathsPlugin()
+          new TsConfigPathsPlugin(),
         ]
         return config
       },
@@ -45,10 +45,16 @@ module.exports = (phase, { defaultConfig }) => {
         localIdentName:
           phase === PHASE_DEVELOPMENT_SERVER
             ? '[name]_[local]_[hash:base64:5]'
-            : '[hash:base64]'
-      }
+            : '[hash:base64]',
+      },
     })
   )
+
+  const withBundleAnalyzer = require('@next/bundle-analyzer')({
+    enabled: process.env.ANALYZE === 'true',
+  })
+
+  config = withBundleAnalyzer(config)
 
   if (phase === PHASE_DEVELOPMENT_SERVER) {
     return config

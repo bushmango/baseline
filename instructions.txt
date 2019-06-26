@@ -4,3 +4,14 @@
 - awsume into the roll you need (i.e. steve)
 - run sls create_somain
 - wait 40 minutesnpm install serverless-domain-manager --save-dev
+
+
+-- how to deploy
+- next build
+- copy .next to deploy folder
+- custom project.json file and node_modules just for deploy
+- copy server folder
+- serverless yaml file should be there
+- sls deploy
+
+-- TODO: resources to S3

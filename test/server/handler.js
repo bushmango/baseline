@@ -5,7 +5,7 @@ const binaryMimeTypes = require('./binaryMimeTypes')
 
 const server = require('./server').setupServer()
 module.exports.server = sls(server, {
-  binary: binaryMimeTypes,
+  binary: binaryMimeTypes
 })
 
 // module.exports.server = async (event, context) => {
