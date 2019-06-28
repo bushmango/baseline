@@ -1,26 +1,39 @@
 // server.js
-const express = require('express')
-const path = require('path')
+import express from 'express'
+import path from 'path'
 const dev = process.env.NODE_ENV !== 'production'
-const next = require('next')
+import next from 'next'
+import { apiMath, apiPing } from './api'
 // const pathMatch = require('path-match')
 const app = next({ dev })
 const handle = app.getRequestHandler()
 // const { parse } = require('url')
 
-function prepareServer (callback) {
+export function prepareServer(
+  options: { includeUi: boolean; includeApi: boolean },
+  callback
+) {
   app.prepare().then(() => {
-    callback(setupServer())
+    callback(setupServer(options))
   })
 }
 
-function setupServer () {
+export function setupServer(options: {
+  includeUi: boolean
+  includeApi: boolean
+}) {
   const server = express()
   // const route = pathMatch()
-  server.use('/_next', express.static(path.join(__dirname, '.next')))
-  server.get('/api/ping', (req, res) => res.send('pong'))
-  server.get('/', (req, res) => app.render(req, res, '/'))
 
+  if (options.includeApi) {
+    apiPing.install(server)
+    apiMath.install(server)
+  }
+
+  if (options.includeUi) {
+    server.use('/_next', express.static(path.join(__dirname, '.next')))
+    server.get('/', (req, res) => app.render(req, res, '/'))
+  }
   // server.get('/dogs', (req, res) => app.render(req, res, '/dogs'))
   // server.get('/dogs/:breed', (req, res) => {
   //   const params = route('/dogs/:breed')(parse(req.url).pathname)
@@ -29,5 +42,3 @@ function setupServer () {
   server.get('*', (req, res) => handle(req, res))
   return server
 }
-
-module.exports = { prepareServer, setupServer }
