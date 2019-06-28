@@ -1,8 +1,8 @@
 // server.js
-import * as express from 'express'
-import * as path from 'path'
+import express from 'express'
+import path from 'path'
 const dev = process.env.NODE_ENV !== 'production'
-import * as next from 'next'
+import next from 'next'
 import { apiMath, apiPing } from './api'
 // const pathMatch = require('path-match')
 const app = next({ dev })

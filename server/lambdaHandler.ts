@@ -1,4 +1,4 @@
-import * as sls from 'serverless-http'
+import sls from 'serverless-http'
 
 import { setupServer } from './server'
 

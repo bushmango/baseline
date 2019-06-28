@@ -20,7 +20,7 @@ async function copy(src: string, glob: string, dest: string) {
 
 async function runCommand(cmd: string, args: string[], options?: any) {
   const child = spawn(cmd, args, options)
-  log(cmd, ...args)
+  log(cmd, ...args, options || '')
   for await (const data of child.stdout) {
     process.stdout.write(data)
     //console.log(`> ${data}`)
@@ -36,17 +36,18 @@ async function runCommand(cmd: string, args: string[], options?: any) {
 }
 
 async function run() {
-  const basePath = path.join(__dirname, '../')
+  const basePath = path.join(__dirname, '.')
+  const clientPath = path.join(__dirname, '../client')
   const deployPath = path.join(basePath, '../deploy')
   const distPath = path.join(basePath, '../dist')
-  const nextPath = path.join(basePath, '.next')
-  const serverPath = path.join(basePath, 'server')
+  const nextPath = path.join(clientPath, '/.next')
+  const serverPath = path.join(basePath, './')
   const distServerPath = path.join(distPath, 'server')
 
   log('Deploying...', distPath)
 
-  await runCommand('rm', ['-rf', nextPath])
-  await runCommand('yarn', ['next', 'build'])
+  await runCommand('rm', ['-rf', nextPath], { cwd: clientPath })
+  await runCommand('yarn', ['next', 'build'], { cwd: clientPath })
 
   await runCommand('rm', ['-rf', distPath])
   await runCommand('mkdir', [distPath])
@@ -54,7 +55,7 @@ async function run() {
 
   await runCommand('mkdir', [distServerPath])
 
-  await runCommand('tsc', ['--project', 'server/tsconfig.server.json'])
+  await runCommand('tsc', ['--project', 'tsconfig.server.json'])
 
   await copy(deployPath, '*', distPath)
 

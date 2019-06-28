@@ -1,10 +1,11 @@
 {
-  "extends": "./../tsconfig.json",
+  "extends": "./tsconfig.json",
   "compilerOptions": {
     "module": "commonjs",
     "target": "es2017",
     "lib": ["es2017"],
-    "outDir": "../../deploy/server",
+    "esModuleInterop": true,
+    "outDir": "../deploy/server",
     "allowSyntheticDefaultImports": true
   },
   "include": ["**/*.ts"]

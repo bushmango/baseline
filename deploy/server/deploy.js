@@ -6,8 +6,15 @@ var __asyncValues = (this && this.__asyncValues) || function (o) {
     function verb(n) { i[n] = o[n] && function (v) { return new Promise(function (resolve, reject) { v = o[n](v), settle(resolve, reject, v.done, v.value); }); }; }
     function settle(resolve, reject, d, v) { Promise.resolve(v).then(function(v) { resolve({ value: v, done: d }); }, reject); }
 };
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const path = require("path");
+const path = __importStar(require("path"));
 const util_1 = require("util");
 const { spawn } = require('child_process');
 const copyAsync = util_1.promisify(require('copy'));
@@ -25,7 +32,7 @@ async function copy(src, glob, dest) {
 async function runCommand(cmd, args, options) {
     var e_1, _a;
     const child = spawn(cmd, args, options);
-    log(cmd, ...args);
+    log(cmd, ...args, options || '');
     try {
         for (var _b = __asyncValues(child.stdout), _c; _c = await _b.next(), !_c.done;) {
             const data = _c.value;
@@ -47,20 +54,21 @@ async function runCommand(cmd, args, options) {
     });
 }
 async function run() {
-    const basePath = path.join(__dirname, '../');
+    const basePath = path.join(__dirname, '.');
+    const clientPath = path.join(__dirname, '../client');
     const deployPath = path.join(basePath, '../deploy');
     const distPath = path.join(basePath, '../dist');
-    const nextPath = path.join(basePath, '.next');
-    const serverPath = path.join(basePath, 'server');
+    const nextPath = path.join(clientPath, '/.next');
+    const serverPath = path.join(basePath, './');
     const distServerPath = path.join(distPath, 'server');
     log('Deploying...', distPath);
-    await runCommand('rm', ['-rf', nextPath]);
-    await runCommand('yarn', ['next', 'build']);
+    await runCommand('rm', ['-rf', nextPath], { cwd: clientPath });
+    await runCommand('yarn', ['next', 'build'], { cwd: clientPath });
     await runCommand('rm', ['-rf', distPath]);
     await runCommand('mkdir', [distPath]);
     await runCommand('mv', [nextPath, distPath + '/.next']);
     await runCommand('mkdir', [distServerPath]);
-    await runCommand('tsc', ['--project', 'server/tsconfig.server.json']);
+    await runCommand('tsc', ['--project', 'tsconfig.server.json']);
     await copy(deployPath, '*', distPath);
     await copy(deployPath + '/server', '**/*.js', distServerPath);
     await copy(serverPath, '*.json', distServerPath);
