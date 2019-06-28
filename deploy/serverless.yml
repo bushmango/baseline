@@ -22,6 +22,7 @@ provider:
   runtime: nodejs10.x
   stage: ${self:custom.secrets.NODE_ENV}
   region: us-east-1
+  memorySize: 256
   environment:
     NODE_ENV: ${self:custom.secrets.NODE_ENV}
 
@@ -59,7 +60,7 @@ provider:
 #    - exclude-me-dir/**
 
 functions:
-  hello:
+  index:
     handler: server/handler.server
     events:
       - http: ANY /

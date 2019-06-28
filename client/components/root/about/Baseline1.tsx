@@ -6,7 +6,6 @@ import { Layout } from '@components/shared/Layout'
 export function Baseline1(props: { data: any }) {
   return (
     <Layout>
-      asdf
       <Baseline1Page />
     </Layout>
   )
