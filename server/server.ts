@@ -40,5 +40,5 @@ export function setupServer(options: {
   //   return app.render(req, res, '/dogs/_breed', params)
   // })
   server.get('*', (req, res) => handle(req, res))
-  return server
+  return server 
 }
