@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const serverless_http_1 = require("serverless-http");
+const sls = require("serverless-http");
 const server_1 = require("./server");
 const binaryMimeTypes = [
     'application/javascript',
@@ -22,7 +22,7 @@ const binaryMimeTypes = [
     'text/xml',
 ];
 const server = server_1.setupServer({ includeUi: true, includeApi: true });
-module.exports.server = serverless_http_1.default(server, {
+module.exports.server = sls(server, {
     binary: binaryMimeTypes,
 });
 //# sourceMappingURL=lambdaHandler.js.map

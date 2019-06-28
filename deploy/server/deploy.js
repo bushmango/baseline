@@ -60,14 +60,14 @@ async function run() {
     await runCommand('mkdir', [distPath]);
     await runCommand('mv', [nextPath, distPath + '/.next']);
     await runCommand('mkdir', [distServerPath]);
-    await copy(deployPath, '*', distPath);
     await runCommand('tsc', ['--project', 'server/tsconfig.server.json']);
-    await copy(serverPath, '*.js', distServerPath);
+    await copy(deployPath, '*', distPath);
+    await copy(deployPath + '/server', '**/*.js', distServerPath);
     await copy(serverPath, '*.json', distServerPath);
     // await runCommand('yarn', ['install'], { cwd: distPath })
     await runCommand('yarn', ['install'], { cwd: distPath });
     await runCommand('sls', ['deploy'], { cwd: distPath });
-    await runCommand('rm', ['-rf', distPath]);
+    // await runCommand('rm', ['-rf', distPath])
     log('Deployed!');
 }
 run();
