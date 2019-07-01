@@ -35,6 +35,18 @@ module.exports = (phase, { defaultConfig }) => {
           ...(config.resolve.plugins || []),
           new TsConfigPathsPlugin()
         ]
+
+        // Allow additional include files
+        // config.module.rules.forEach(({ use, include, test }, i) => {
+        //   const isBabelLoader = use && use.loader === 'next-babel-loader'
+        //   // const isTSFile = test.toString() === '/\\.(ts|tsx)$/'
+        //   // const isJSFile = test.toString() === '/\\.(js|jsx)$/'
+        //   if (isBabelLoader) {
+        //     // && (isTSFile || isJSFile)) {
+        //     delete config.module.rules[i].include
+        //   }
+        // })
+
         return config
       },
       cssModules: useCssModules,
@@ -50,11 +62,15 @@ module.exports = (phase, { defaultConfig }) => {
     })
   )
 
+  console.log('config', JSON.stringify(config, null, 2))
+
   const withBundleAnalyzer = require('@next/bundle-analyzer')({
     enabled: process.env.ANALYZE === 'true'
   })
 
   config = withBundleAnalyzer(config)
+
+  supportSymlinkedFilesInNextBabelLoader(config)
 
   if (phase === PHASE_DEVELOPMENT_SERVER) {
     config.assetPrefix = undefined

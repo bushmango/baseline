@@ -2,11 +2,17 @@ import React from 'react'
 
 import styles from './AboutPage.scss'
 import { Layout } from '@components/shared/Layout'
+// import { Button } from '@components/button/Button'
+
+import { Button } from '@components/button/Button'
+import { Button2 } from '@common/components/button/Button2'
 
 export function Baseline1(props: { data: any }) {
   return (
     <Layout>
       <Baseline1Page />
+      <Button>A test button</Button>
+      <Button2>A test button</Button2>
     </Layout>
   )
 }

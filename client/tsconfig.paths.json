@@ -6,7 +6,8 @@
       "@lib/*": ["lib/*"],
       "@pages/*": ["pages/*"],
       "@state/*": ["state/*"],
-      "@theme/*": ["theme/*"]
+      "@theme/*": ["theme/*"],
+      "@common/*": ["common/*"]
     }
   }
 }
