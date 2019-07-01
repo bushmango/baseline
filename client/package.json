@@ -5,6 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "@next/bundle-analyzer": "^8.1.0",
+    "barrel-rider": "^1.0.0",
     "copy": "^0.3.2",
     "express": "4.17.0",
     "next": "8.1.0",
@@ -59,7 +60,7 @@
     "now-build": "next build",
     "now-deploy": "npm run build && now",
     "deploy": "awsume bushmango && next build && sls deploy",
-    "barreler": "cd .. && cd barreler && yarn start",
+    "barreler": "yarn barrel-rider --watch .",
     "sass-build": "tsm --nameFormat camel --exportType default '+(components|theme)/**/*.scss'",
     "sass": "tsm --watch --nameFormat camel --exportType default '+(components|theme)/**/*.scss'",
     "deploy-static": "s3-deploy './static/**' --cwd './' --region us-east-1 --bucket serverless-cowsay-3-prod",
