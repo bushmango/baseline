@@ -72,6 +72,9 @@ async function run() {
     await copy(deployPath, '*', distPath);
     await copy(deployPath + '/server', '**/*.js', distServerPath);
     await copy(serverPath, '*.json', distServerPath);
+    // AWS sync
+    await runCommand('aws', ['s3', 'sync', distPath + '/.next', 's3://s3.baseline.stevebushman.com/_next']);
+    await runCommand('aws', ['s3', 'sync', clientPath + '/static', 's3://s3.baseline.stevebushman.com/static']);
     // await runCommand('yarn', ['install'], { cwd: distPath })
     await runCommand('yarn', ['install'], { cwd: distPath });
     await runCommand('sls', ['deploy'], { cwd: distPath });
