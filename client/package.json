@@ -52,7 +52,7 @@
     "dev": "yarn start",
     "start": "stmux [ [ \"yarn dev-start\" ] : [ \"yarn dev-secondary\" ] ] -t \"Base - :3007 - Ctrl+a then k to quit\" -e \"[Ff]ail(?!ed\\stests\\.)\" --mouse",
     "dev-secondary": "concurrently \"yarn sass\" \"yarn barreler\"",
-    "dev-start": "yarn ts-node --project tsconfig.server.json server/index.ts",
+    "dev-start": "yarn ts-node --project ../server/tsconfig.server.json ../server/index.ts",
     "build": "next build",
     "_start": "next start -p 8000",
     "start-prod": "cross-env NODE_ENV=production node dist/index.js",
