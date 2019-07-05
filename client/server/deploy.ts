@@ -61,6 +61,7 @@ async function run() {
 
   await runCommand('mkdir', [distServerPath])
 
+  await runCommand('rm', ['-rf', deployPath + '/server'])
   await runCommand('tsc', ['--project', 'tsconfig.server.json'])
 
   await copy(deployPath, '*', distPath)

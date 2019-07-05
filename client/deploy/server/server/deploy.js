@@ -50,6 +50,9 @@ async function runCommand(cmd, args, options) {
     return new Promise((resolve, reject) => {
         child.on('exit', (code) => {
             console.log(`${cmd} | ${code}`);
+            if (code !== 0) {
+                process.exit(code);
+            }
             resolve();
         });
     });
@@ -70,6 +73,7 @@ async function run() {
     await runCommand('mkdir', [distPath]);
     await runCommand('mv', [nextPath, distPath + '/.next']);
     await runCommand('mkdir', [distServerPath]);
+    await runCommand('rm', ['-rf', deployPath + '/server']);
     await runCommand('tsc', ['--project', 'tsconfig.server.json']);
     await copy(deployPath, '*', distPath);
     await copy(deployPath + '/server', '**/*.js', distServerPath);
