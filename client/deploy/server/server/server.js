@@ -12,7 +12,7 @@ const next_1 = __importDefault(require("next"));
 const app = next_1.default({ dev });
 const handle = app.getRequestHandler();
 // const { parse } = require('url')
-const installApi_1 = require("./api/installApi");
+const installApi_1 = require("../api/installApi");
 function prepareServer(options, callback) {
     app.prepare().then(() => {
         callback(setupServer(options));

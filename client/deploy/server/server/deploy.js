@@ -62,6 +62,7 @@ async function run() {
     const nextPath = path.join(clientPath, '/.next');
     const serverPath = path.join(basePath, './');
     const distServerPath = path.join(distPath, 'server');
+    const distApiPath = path.join(distPath, 'api');
     log('Deploying...', distPath);
     await runCommand('rm', ['-rf', nextPath], { cwd: clientPath });
     await runCommand('yarn', ['next', 'build'], { cwd: clientPath });
@@ -72,6 +73,7 @@ async function run() {
     await runCommand('tsc', ['--project', 'tsconfig.server.json']);
     await copy(deployPath, '*', distPath);
     await copy(deployPath + '/server', '**/*.js', distServerPath);
+    await copy(deployPath + '/api', '**/*.js', distApiPath);
     await copy(serverPath, '*.json', distServerPath);
     // AWS sync
     await runCommand('aws', [

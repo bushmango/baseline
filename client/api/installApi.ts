@@ -1,4 +1,4 @@
-import { apiMath, apiPing } from '../api'
+import { apiMath, apiPing } from '.'
 import express from 'express'
 
 export function installApi(server: express.Express) {

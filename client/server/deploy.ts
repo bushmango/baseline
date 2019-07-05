@@ -32,6 +32,9 @@ async function runCommand(cmd: string, args: string[], options?: any) {
   return new Promise((resolve, reject) => {
     child.on('exit', (code) => {
       console.log(`${cmd} | ${code}`)
+      if (code !== 0) {
+        process.exit(code)
+      }
       resolve()
     })
   })
@@ -45,6 +48,7 @@ async function run() {
   const nextPath = path.join(clientPath, '/.next')
   const serverPath = path.join(basePath, './')
   const distServerPath = path.join(distPath, 'server')
+  const distApiPath = path.join(distPath, 'api')
 
   log('Deploying...', distPath)
 
@@ -62,6 +66,8 @@ async function run() {
   await copy(deployPath, '*', distPath)
 
   await copy(deployPath + '/server', '**/*.js', distServerPath)
+  await copy(deployPath + '/api', '**/*.js', distApiPath)
+
   await copy(serverPath, '*.json', distServerPath)
 
   // AWS sync

@@ -9,7 +9,7 @@ const app = next({ dev })
 const handle = app.getRequestHandler()
 // const { parse } = require('url')
 
-import { installApi } from './api/installApi'
+import { installApi } from '../api/installApi'
 
 export function prepareServer(
   options: { includeUi: boolean; includeApi: boolean },

@@ -61,7 +61,7 @@ provider:
 
 functions:
   index:
-    handler: server/lambdaHandler.server
+    handler: server/server/lambdaHandler.server
     events:
       - http: ANY /
       - http: ANY /{proxy+}
