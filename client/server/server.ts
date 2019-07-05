@@ -3,11 +3,13 @@ import express from 'express'
 import path from 'path'
 const dev = process.env.NODE_ENV !== 'production'
 import next from 'next'
-import { apiMath, apiPing } from '../api'
+
 // const pathMatch = require('path-match')
 const app = next({ dev })
 const handle = app.getRequestHandler()
 // const { parse } = require('url')
+
+import { installApi } from './api/installApi'
 
 export function prepareServer(
   options: { includeUi: boolean; includeApi: boolean },
@@ -26,8 +28,7 @@ export function setupServer(options: {
   // const route = pathMatch()
 
   if (options.includeApi) {
-    apiPing.install(server)
-    apiMath.install(server)
+    installApi(server)
   }
 
   if (options.includeUi) {

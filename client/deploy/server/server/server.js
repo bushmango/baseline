@@ -8,11 +8,11 @@ const express_1 = __importDefault(require("express"));
 const path_1 = __importDefault(require("path"));
 const dev = process.env.NODE_ENV !== 'production';
 const next_1 = __importDefault(require("next"));
-const api_1 = require("../api");
 // const pathMatch = require('path-match')
 const app = next_1.default({ dev });
 const handle = app.getRequestHandler();
 // const { parse } = require('url')
+const installApi_1 = require("./api/installApi");
 function prepareServer(options, callback) {
     app.prepare().then(() => {
         callback(setupServer(options));
@@ -23,8 +23,7 @@ function setupServer(options) {
     const server = express_1.default();
     // const route = pathMatch()
     if (options.includeApi) {
-        api_1.apiPing.install(server);
-        api_1.apiMath.install(server);
+        installApi_1.installApi(server);
     }
     if (options.includeUi) {
         server.use('/_next', express_1.default.static(path_1.default.join(__dirname, '.next')));
