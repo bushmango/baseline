@@ -5,6 +5,8 @@ const { spawn } = require('child_process')
 
 const copyAsync = promisify(require('copy'))
 
+import { config } from '../config/config'
+
 function log(msg: string, ...msgs: string[]) {
   console.log(msg, ...msgs)
 }
@@ -37,7 +39,7 @@ async function runCommand(cmd: string, args: string[], options?: any) {
 
 async function run() {
   const basePath = path.join(__dirname, '.')
-  const clientPath = path.join(__dirname, '../client')
+  const clientPath = path.join(__dirname, '../')
   const deployPath = path.join(basePath, '../deploy')
   const distPath = path.join(basePath, '../dist')
   const nextPath = path.join(clientPath, '/.next')
@@ -63,8 +65,18 @@ async function run() {
   await copy(serverPath, '*.json', distServerPath)
 
   // AWS sync
-  await runCommand('aws', ['s3', 'sync', distPath + '/.next', 's3://s3.baseline.stevebushman.com/_next'])
-  await runCommand('aws', ['s3', 'sync', clientPath + '/static', 's3://s3.baseline.stevebushman.com/static'])
+  await runCommand('aws', [
+    's3',
+    'sync',
+    distPath + '/.next',
+    config.s3 + '/_next',
+  ])
+  await runCommand('aws', [
+    's3',
+    'sync',
+    clientPath + '/static',
+    config.s3 + '/static',
+  ])
 
   // await runCommand('yarn', ['install'], { cwd: distPath })
   await runCommand('yarn', ['install'], { cwd: distPath })

@@ -3,7 +3,7 @@ import express from 'express'
 import path from 'path'
 const dev = process.env.NODE_ENV !== 'production'
 import next from 'next'
-import { apiMath, apiPing } from './api'
+import { apiMath, apiPing } from '../api'
 // const pathMatch = require('path-match')
 const app = next({ dev })
 const handle = app.getRequestHandler()
@@ -32,13 +32,17 @@ export function setupServer(options: {
 
   if (options.includeUi) {
     server.use('/_next', express.static(path.join(__dirname, '.next')))
-    server.get('/', (req, res) => app.render(req, res, '/'))
+    server.get('/', (req, res) => app.render(req, res, '/AppIndex'))
+    // server.get('/baseline-1', (req, res) => app.render(req, res, '/AppIndex'))
+    server.get('*', (req, res) => app.render(req, res, '/AppIndex'))
+  } else {
+    server.get('*', (req, res) => handle(req, res))
   }
   // server.get('/dogs', (req, res) => app.render(req, res, '/dogs'))
   // server.get('/dogs/:breed', (req, res) => {
   //   const params = route('/dogs/:breed')(parse(req.url).pathname)
   //   return app.render(req, res, '/dogs/_breed', params)
   // })
-  server.get('*', (req, res) => handle(req, res))
-  return server 
+
+  return server
 }

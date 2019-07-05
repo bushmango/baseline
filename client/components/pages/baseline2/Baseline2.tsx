@@ -1,6 +1,6 @@
 import React from 'react'
 
-import styles from './AboutPage.scss'
+import styles from '../about/AboutPage.scss'
 import { Layout } from '@components/shared/Layout'
 
 const Image = (props: { src: string }) => {

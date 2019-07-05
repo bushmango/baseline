@@ -62,7 +62,7 @@ module.exports = (phase, { defaultConfig }) => {
     })
   )
 
-  console.log('config', JSON.stringify(config, null, 2))
+  // console.log('config', JSON.stringify(config, null, 2))
 
   const withBundleAnalyzer = require('@next/bundle-analyzer')({
     enabled: process.env.ANALYZE === 'true'
@@ -70,7 +70,7 @@ module.exports = (phase, { defaultConfig }) => {
 
   config = withBundleAnalyzer(config)
 
-  supportSymlinkedFilesInNextBabelLoader(config)
+  // supportSymlinkedFilesInNextBabelLoader(config)
 
   if (phase === PHASE_DEVELOPMENT_SERVER) {
     config.assetPrefix = undefined

@@ -7,7 +7,8 @@
       "@pages/*": ["pages/*"],
       "@state/*": ["state/*"],
       "@theme/*": ["theme/*"],
-      "@common/*": ["common/*"]
+      "@common/*": ["common/*"],
+      "@config/*": ["config/*"]
     }
   }
 }
