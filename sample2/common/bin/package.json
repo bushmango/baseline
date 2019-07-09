@@ -1,0 +1,23 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "sync": "ts-node --project tsconfig.json  sync.ts",
+    "deploy": "ts-node --project tsconfig.json  deploy.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^12.6.1",
+    "copy": "^0.3.2",
+    "copyfiles": "^2.1.1",
+    "ncp": "^2.0.0",
+    "rimraf": "^2.6.3",
+    "sync-folders": "^2.0.0",
+    "sync-glob": "^1.4.0",
+    "typescript": "^3.5.2"
+  },
+  "devDependencies": {}
+}
