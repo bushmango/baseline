@@ -1,4 +1,4 @@
-import Router from 'src-ui/shared/node_modules/next/router'
+import Router from 'next/router'
 // import { _ } from '../imports/lodash'
 import * as _ from 'lodash'
 import * as log from './log'

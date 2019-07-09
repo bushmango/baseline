@@ -15,4 +15,8 @@ export const routes = [
     path: '/about',
     component: About,
   },
+  {
+    path: '/',
+    component: About,
+  },
 ]

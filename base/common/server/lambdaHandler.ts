@@ -1,6 +1,6 @@
 import sls from 'serverless-http'
 
-import { setupServer } from './server'
+import { prepareServer } from './server'
 
 const binaryMimeTypes = [
   'application/javascript',
@@ -22,7 +22,11 @@ const binaryMimeTypes = [
   'text/xml',
 ]
 
-const server = setupServer({ includeUi: true, includeApi: true })
+const server = prepareServer({
+  includeUi: true,
+  includeApi: true,
+  isLambda: true,
+})
 module.exports.server = sls(server, {
   binary: binaryMimeTypes,
 })

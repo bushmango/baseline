@@ -117,7 +117,7 @@ plugins:
   - serverless-domain-manager
 
 custom:
-  secrets: ${file(server/config/secrets.json)}
+  secrets: ${file(../../src-config/secrets.json)}
   apigwBinary:
     types:
       - '*/*'

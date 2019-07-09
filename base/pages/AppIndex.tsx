@@ -1,7 +1,7 @@
 import { IndexPage } from '@common/IndexPage'
 import { Layout } from 'src-ui/shared'
 
-import { routes } from '@config/routes'
+import { routes } from 'src-config/routes'
 
 export const NoMatch = () => {
   return (

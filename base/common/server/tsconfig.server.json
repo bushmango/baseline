@@ -8,5 +8,5 @@
     "outDir": "../deploy/server",
     "allowSyntheticDefaultImports": true
   },
-  "include": ["**/*.ts", "../api/**/*.ts", "../config/config*.ts"]
+  "include": ["**/*.ts", "../../src-api/**/*.ts", "../../src-config/config*.ts"]
 }

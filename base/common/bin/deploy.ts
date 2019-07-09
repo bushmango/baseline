@@ -5,7 +5,7 @@ const { spawn } = require('child_process')
 
 const copyAsync = promisify(require('copy'))
 
-import { config } from '../../config/config'
+import { config } from '../../src-config/config'
 
 function log(msg: string, ...msgs: string[]) {
   console.log(msg, ...msgs)
@@ -41,14 +41,14 @@ async function runCommand(cmd: string, args: string[], options?: any) {
 }
 
 async function run() {
-  const basePath = path.join(__dirname, '.')
-  const clientPath = path.join(__dirname, '../')
-  const deployPath = path.join(basePath, '../deploy')
-  const distPath = path.join(basePath, '../dist')
-  const nextPath = path.join(clientPath, '/.next')
-  const serverPath = path.join(basePath, './')
-  const distServerPath = path.join(distPath, 'server')
-  const distApiPath = path.join(distPath, 'api')
+  const basePath = path.join(__dirname, '../../')
+  const clientPath = path.join(basePath, './src-ui')
+  const deployPath = path.join(basePath, './common/deploy')
+  const distPath = path.join(basePath, './dist')
+  const nextPath = path.join(basePath, './.next')
+  const serverPath = path.join(basePath, './common/server')
+  const distServerPath = path.join(distPath, './server')
+  const distApiPath = path.join(distPath, './src-api')
 
   log('Deploying...', distPath)
 
@@ -62,12 +62,12 @@ async function run() {
   await runCommand('mkdir', [distServerPath])
 
   await runCommand('rm', ['-rf', deployPath + '/server'])
-  await runCommand('tsc', ['--project', 'tsconfig.server.json'])
+  await runCommand('tsc', ['--project', 'common/server/tsconfig.server.json'])
 
   await copy(deployPath, '*', distPath)
 
   await copy(deployPath + '/server', '**/*.js', distServerPath)
-  await copy(deployPath + '/api', '**/*.js', distApiPath)
+  await copy(deployPath + '/src-api', '**/*.js', distApiPath)
 
   await copy(serverPath, '*.json', distServerPath)
 
