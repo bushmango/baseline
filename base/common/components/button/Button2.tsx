@@ -2,10 +2,13 @@ import React from 'react'
 
 import styles from './Button2.scss'
 
-export const Button2 = (props: { children: React.ReactNode }) => {
+export const Button2 = (props: {
+  children: React.ReactNode
+  onClick?: () => void
+}) => {
   return (
-    <div className={styles.button}>
-      This is an example button 2222 {props.children}
-    </div>
+    <button className={styles.button} onClick={props.onClick}>
+      {props.children}
+    </button>
   )
 }

@@ -18,7 +18,7 @@ const { stateManager, useSubscribe } = createSos(
 )
 export { useSubscribe }
 
-export async function adjustCount(adjustBy: number) {
+export function adjustCount(adjustBy: number) {
   stateManager.produce((ds) => {
     ds.count += adjustBy
   })

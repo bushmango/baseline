@@ -20,6 +20,7 @@
       "@components/*": ["components/*"],
       "@common/*": ["common/*"],
       "@lib/*": ["common/lib/*"],
+      "@ui/*": ["src-ui/*"],
       "@pages/*": ["src-ui/pages/*"],
       "@state/*": ["src-ui/state/*"],
       "@theme/*": ["src-ui/theme/*"],
