@@ -6,27 +6,27 @@ import Link from 'next/link'
 export const Layout = (props: { children: React.ReactNode }) => {
   return (
     <div>
-      <div>
+      {/* <div>
         <a href='/baseline-1'>Baseline 1</a> |{' '}
         <a href='/baseline-2'>Baseline 2</a>
-      </div>
+      </div> */}
       <div>
-        <a href='/baseline-1' onClick={() => Router.push('/baseline-1?hi')}>
-          Baseline 1
-        </a>
+        <div onClick={() => Router.push('/baseline-1?hi')}>
+          Baseline 1 Router
+        </div>
         |
-        <a href='/baseline-2' onClick={() => Router.push('/baseline-2?ho')}>
-          Baseline 2
-        </a>
+        <div onClick={() => Router.push('/baseline-2?ho')}>
+          Baseline 2 Router
+        </div>
       </div>
       <div>
         <Link href='/baseline-1'>
-          <a>b1</a>
-        </Link>{' '}
+          <a>Baseline 1 Link</a>
+        </Link>
         |
         <Link href='/baseline-2'>
-          <a>b2</a>
-        </Link>{' '}
+          <a>Baseline 2 Link</a>
+        </Link>
       </div>
 
       {props.children}

@@ -18,12 +18,12 @@
     "baseUrl": ".",
     "paths": {
       "@components/*": ["components/*"],
-      "@lib/*": ["lib/*"],
-      "@pages/*": ["pages/*"],
-      "@state/*": ["state/*"],
-      "@theme/*": ["theme/*"],
       "@common/*": ["common/*"],
-      "@config/*": ["config/*"]
+      "@lib/*": ["common/lib/*"],
+      "@pages/*": ["src-ui/pages/*"],
+      "@state/*": ["src-ui/state/*"],
+      "@theme/*": ["src-ui/theme/*"],
+      "@config/*": ["src-config/*"]
     }
   }
 }

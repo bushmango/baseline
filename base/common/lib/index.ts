@@ -3,3 +3,5 @@
 /* tslint:disable */
 import * as lodash from './lodash'
 export { lodash }
+import * as log from './log'
+export { log }

@@ -1,5 +1,5 @@
 import { IndexPage } from '@common/IndexPage'
-import { Layout } from 'src-ui/shared'
+import { Layout } from '@pages/layout'
 
 import { routes } from 'src-config/routes'
 

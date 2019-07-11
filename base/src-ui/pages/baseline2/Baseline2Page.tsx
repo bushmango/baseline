@@ -1,7 +1,6 @@
 import React from 'react'
 
-import styles from '../about/AboutPage.scss'
-import { Layout } from 'src-ui/shared/Layout'
+import { Layout } from '@pages/layout/Layout'
 
 const Image = (props: { src: string }) => {
   let src = props.src
@@ -13,21 +12,12 @@ const Image = (props: { src: string }) => {
   return <img src={src} style={{ maxHeight: '200px' }} />
 }
 
-export function Baseline2(props: { data: any }) {
+export function Baseline2Page(props: { data: any }) {
   return (
     <Layout>
-      <Baseline2Page />
-      {process.env.STATIC_PREFIX}
+      <h1>Baseline 2</h1>
+      Baseline 2{process.env.STATIC_PREFIX}
       <Image src='/static/images/caffeine-coffee-cup-374780.jpg' />
     </Layout>
-  )
-}
-
-export const Baseline2Page = () => {
-  return (
-    <div>
-      <h1>Baseline 2</h1>
-      Baseline 2
-    </div>
   )
 }
