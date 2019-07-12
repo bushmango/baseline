@@ -61,7 +61,7 @@ provider:
 
 functions:
   index:
-    handler: server/server/lambdaHandler.server
+    handler: server/common/server/lambdaHandler.server
     events:
       - http: ANY /
       - http: ANY /{proxy+}
@@ -117,13 +117,13 @@ plugins:
   - serverless-domain-manager
 
 custom:
-  secrets: ${file(../../src-config/secrets.json)}
+  secrets: ${file(secrets.json)}
   apigwBinary:
     types:
       - '*/*'
   customDomain:
     domainName: ${self:custom.secrets.DOMAIN}
-    basePath: ''
+    # basePath: ''
     stage: ${self:custom.secrets.NODE_ENV}
     createRoute53Record: true
     # endpointType: 'regional'

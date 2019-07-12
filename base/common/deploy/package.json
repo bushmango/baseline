@@ -12,6 +12,7 @@
     "@types/node": "^12.0.10",
     "@zeit/next-sass": "^1.0.1",
     "express": "^4.17.1",
+    "midboss": "^0.22.0",
     "next": "^8.1.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",

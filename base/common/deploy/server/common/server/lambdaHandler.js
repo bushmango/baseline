@@ -24,8 +24,12 @@ const binaryMimeTypes = [
     'text/text',
     'text/xml',
 ];
-const server = server_1.setupServer({ includeUi: true, includeApi: true });
-module.exports.server = serverless_http_1.default(server, {
+module.exports.server = serverless_http_1.default(server_1.prepareServer({
+    includeApi: true,
+    includeUi: true,
+    isLambda: true,
+    port: null,
+}), {
     binary: binaryMimeTypes,
 });
 //# sourceMappingURL=lambdaHandler.js.map

@@ -22,14 +22,6 @@ const binaryMimeTypes = [
   'text/xml',
 ]
 
-module.exports.server = sls(
-  prepareServer({
-    includeApi: true,
-    includeUi: true,
-    isLambda: true,
-    port: null,
-  }),
-  {
-    binary: binaryMimeTypes,
-  }
-)
+module.exports.server = sls(prepareServer(), {
+  binary: binaryMimeTypes,
+})

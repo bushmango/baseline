@@ -1,0 +1,25 @@
+service: baseline-base9
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+  memorySize: 512
+  stage: dev
+  region: us-east-1
+
+plugins:
+  - serverless-apigw-binary
+  - serverless-domain-manager
+
+custom:
+  secrets: ${file(./secrets.json)}
+  apigwBinary:
+    types:
+      - '*/*'
+  customDomain:
+    domainName: ${self:custom.secrets.DOMAIN}
+    basePath: ''
+    stage: ${self:custom.secrets.NODE_ENV}
+    createRoute53Record: true
+    # endpointType: 'regional'
+    # if the ACM certificate is created in a region except for `'us-east-1'` you need `endpointType: 'regional'`

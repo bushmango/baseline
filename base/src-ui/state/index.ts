@@ -3,7 +3,5 @@
 /* tslint:disable */
 import * as router from './router'
 export { router }
-import * as sos from './sos'
-export { sos }
 import * as sosExample from './sosExample'
 export { sosExample }

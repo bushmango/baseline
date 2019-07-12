@@ -28,6 +28,11 @@ async function runCommand(cmd: string, args: string[], options?: any) {
     //console.log(`> ${data}`)
     //console.lo
   }
+  for await (const data of child.stderr) {
+    process.stderr.write(data)
+    //console.log(`> ${data}`)
+    //console.lo
+  }
 
   return new Promise((resolve, reject) => {
     child.on('exit', (code) => {
@@ -42,7 +47,7 @@ async function runCommand(cmd: string, args: string[], options?: any) {
 
 async function run() {
   const basePath = path.join(__dirname, '../../')
-  const clientPath = path.join(basePath, './src-ui')
+  const clientPath = path.join(basePath, './')
   const deployPath = path.join(basePath, './common/deploy')
   const distPath = path.join(basePath, './dist')
   const nextPath = path.join(basePath, './.next')
@@ -52,6 +57,7 @@ async function run() {
 
   log('Deploying...', distPath)
 
+  log('Compiling client')
   await runCommand('rm', ['-rf', nextPath], { cwd: clientPath })
   await runCommand('yarn', ['next', 'build'], { cwd: clientPath })
 
@@ -59,10 +65,13 @@ async function run() {
   await runCommand('mkdir', [distPath])
   await runCommand('mv', [nextPath, distPath + '/.next'])
 
+  log('Compiling server')
   await runCommand('mkdir', [distServerPath])
-
   await runCommand('rm', ['-rf', deployPath + '/server'])
-  await runCommand('tsc', ['--project', 'common/server/tsconfig.server.json'])
+  await runCommand('tsc', [
+    '--project',
+    path.join(serverPath, 'tsconfig.server.json'),
+  ])
 
   await copy(deployPath, '*', distPath)
 
@@ -87,6 +96,7 @@ async function run() {
 
   // await runCommand('yarn', ['install'], { cwd: distPath })
   await runCommand('yarn', ['install'], { cwd: distPath })
+  await copy(path.join(basePath, '/src-config'), '*.json', distPath)
   await runCommand('sls', ['deploy'], { cwd: distPath })
 
   // await runCommand('rm', ['-rf', distPath])

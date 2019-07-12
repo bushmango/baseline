@@ -1,4 +1,4 @@
-import { createSos } from './sos'
+import { createSos } from '@lib/createSos'
 
 export interface IStateExample {
   count: number

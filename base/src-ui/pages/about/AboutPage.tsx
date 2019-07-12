@@ -10,7 +10,8 @@ export function Keyword(props: { children: React.ReactNode }) {
 export function AboutPage(props: { data: any }) {
   return (
     <Layout>
-      <h1>About baseline</h1>><h2>baseline project to get started</h2>
+      <h1>About baseline</h1>
+      <h2>baseline project to get started</h2>
       <Keyword>NextJS</Keyword>
       <Keyword>React</Keyword>
     </Layout>
