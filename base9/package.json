@@ -11,7 +11,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "next": "^9.0.0",
+    "next": "^11.1.3",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "serverless-apigw-binary": "^0.4.4",
