@@ -7,7 +7,7 @@
     "@next/bundle-analyzer": "^8.1.0",
     "barrel-rider": "^1.0.0",
     "copy": "^0.3.2",
-    "express": "4.17.1",
+    "express": "4.17.3",
     "midboss": "^0.22.0",
     "next": "8.1.0",
     "next-sass": "^1.0.3",
